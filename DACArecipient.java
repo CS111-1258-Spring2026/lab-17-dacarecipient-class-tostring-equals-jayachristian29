@@ -93,6 +93,9 @@ public class DACArecipient
 
 	/***** OTHER REQUIRED METHODS *****/
 	//TODO: Write the toString method, remember to include documentation 
+	public String toString(){
+		return String.format("%s, %s,%s, %s, %d, %d, %d, %c", surname, givenName, uscisNumber, countryOfOrigin, birthday, expirationDate, sex);
+	}
 
 
 	//TODO: Write the equals method, remember to include documentation
@@ -118,9 +121,9 @@ public class DACArecipient
 		card += String.format("║%-25s%-45S║%n", ASCII_ART_5, LABEL_BIRTH_COUNTRY);
 		card += String.format("║%-25s%-45s║%n", ASCII_ART_6, countryOfOrigin);
 		card += String.format("║%-25s%-15S%-30S║%n", ASCII_ART_7, LABEL_BIRTH_DATE, LABEL_SEX);
-		card += String.format("║%-25s%-15d%-30s║%n", ASCII_ART_8, birthday, sex);
-		card += String.format("║%-25s%-15S%-30d║%n", ASCII_ART_9, LABEL_VALID_DATE, validFromDate);
-		card += String.format("║%-25s%-15S%-30d║%n", "", LABEL_EXPIRE_DATE, expirationDate);
+		card += String.format("║%-25s%-15d%-30s║%n", ASCII_ART_8, jdnToDate(birthday), sex);
+		card += String.format("║%-25s%-15S%-30d║%n", ASCII_ART_9, LABEL_VALID_DATE,  jdnToDate(validFromDate));
+		card += String.format("║%-25s%-15S%-30d║%n", "", LABEL_EXPIRE_DATE, jdnToDate(expirationDate));
 		card += String.format("║%-25s%-45s║%n", ASCII_CREDIT, LABEL_REENTRY_DISCLAIMER);
 		card += String.format("╚══════════════════════════════════════════════════════════════════════╝%n");
 		return card;
