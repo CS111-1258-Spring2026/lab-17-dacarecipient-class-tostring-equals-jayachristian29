@@ -1,12 +1,12 @@
 /**
  * Represents one person receiving deferred action for childhood arrivals (DACA).
  * 
- * <TODO add @author info here for all group-mates!>
+ * <TOD add @author info here for all group-mates!>
  *
  *	@version 1.1
  **/
 
-//TODO: Complete UML class diagram
+//TOD: Complete UML class diagram
 /* UML CLASS DIAGRAM:
 -----------------------------------------
 					DACArecipient
@@ -73,10 +73,10 @@ public class DACArecipient
   private char sex;
 
 	/***** ACCESSORS *****/
-	//TODO: Copy the accessors you wrote in the previous lab and insert them here.
+	//TOD: Copy the accessors you wrote in the previous lab and insert them here.
 
 	/***** MUTATORS *****/
-	//TODO: Copy the mutators you wrote in the previous lab and insert them here.
+	//TOD: Copy the mutators you wrote in the previous lab and insert them here.
     
   /**DESCRIPTION: Assigns parameters to corresponding instance variables of calling DACArecipient. */
 	public void setAll(String surname, String givenName, String uscisNumber, String countryOfOrigin, int birthday, int validFromDate, int expirationDate, char sex)
@@ -92,16 +92,32 @@ public class DACArecipient
 	}
 
 	/***** OTHER REQUIRED METHODS *****/
-	//TODO: Write the toString method, remember to include documentation 
+	//TOD: Write the toString method, remember to include documentation 
 	public String toString(){
-		return String.format("%s, %s,%s, %s, %d, %d, %d, %c", surname, givenName, uscisNumber, countryOfOrigin, birthday, expirationDate, sex);
+		return String.format("Surname: %s, Given Name: %s, USCIS Number: %s, Country of Origin: %s, Birthday: %d, Valid From Date: %d, Expiration Date: %d, Sex: %c",
+				surname, givenName, uscisNumber, countryOfOrigin, birthday, validFromDate, expirationDate, sex);
 	}
 
+	/**DESCRIPTION: Compares this DACArecipient object with another object for equality.
+	 * Returns true if the other object is a DACArecipient with identical field values, false otherwise. */
+	public boolean equals(Object other)
+	{
+		if (other == null || this.getClass() != other.getClass())
+			return false;
+		DACArecipient otherRecipient = (DACArecipient) other;
+		return (this.surname == null ? otherRecipient.surname == null : this.surname.equals(otherRecipient.surname)) &&
+				(this.givenName == null ? otherRecipient.givenName == null : this.givenName.equals(otherRecipient.givenName)) &&
+				(this.uscisNumber == null ? otherRecipient.uscisNumber == null : this.uscisNumber.equals(otherRecipient.uscisNumber)) &&
+				(this.countryOfOrigin == null ? otherRecipient.countryOfOrigin == null : this.countryOfOrigin.equals(otherRecipient.countryOfOrigin)) &&
+				this.birthday == otherRecipient.birthday &&
+				this.validFromDate == otherRecipient.validFromDate &&
+				this.expirationDate == otherRecipient.expirationDate &&
+				this.sex == otherRecipient.sex;
+	}
 
-	//TODO: Write the equals method, remember to include documentation
  
   
-	//TODO: Revise the following method to use the jdnToDate method to format the three dates.
+	//TOD: Revise the following method to use the jdnToDate method to format the three dates.
   /** DESCRIPTION: Prints to the console the Employment Authorization Card using the calling DACArecipient's instance variables.*/
   public String printCard()
   {
@@ -121,9 +137,9 @@ public class DACArecipient
 		card += String.format("║%-25s%-45S║%n", ASCII_ART_5, LABEL_BIRTH_COUNTRY);
 		card += String.format("║%-25s%-45s║%n", ASCII_ART_6, countryOfOrigin);
 		card += String.format("║%-25s%-15S%-30S║%n", ASCII_ART_7, LABEL_BIRTH_DATE, LABEL_SEX);
-		card += String.format("║%-25s%-15d%-30s║%n", ASCII_ART_8, jdnToDate(birthday), sex);
-		card += String.format("║%-25s%-15S%-30d║%n", ASCII_ART_9, LABEL_VALID_DATE,  jdnToDate(validFromDate));
-		card += String.format("║%-25s%-15S%-30d║%n", "", LABEL_EXPIRE_DATE, jdnToDate(expirationDate));
+		card += String.format("║%-25s%-15s%-30s║%n", ASCII_ART_8, jdnToDate(birthday), String.valueOf(sex));
+		card += String.format("║%-25s%-15S%-30s║%n", ASCII_ART_9, LABEL_VALID_DATE, jdnToDate(validFromDate));
+		card += String.format("║%-25s%-15S%-30s║%n", "", LABEL_EXPIRE_DATE, jdnToDate(expirationDate));
 		card += String.format("║%-25s%-45s║%n", ASCII_CREDIT, LABEL_REENTRY_DISCLAIMER);
 		card += String.format("╚══════════════════════════════════════════════════════════════════════╝%n");
 		return card;
